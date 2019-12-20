@@ -3,13 +3,23 @@ const jwt = require("jsonwebtoken");
 const KEY = "QWERTY123";
 
 module.exports = {
-  getSingleUser: userid => {
-    return new Promise((resolve, reject) => {
-      User.findById(userid, (err, user) => {
+
+  getSingleUser: userid =>{
+    return new Promise((resolve, reject)=>{
+      User.findById(userid, (err,user)=>{
         !err ? resolve(user) : reject(err);
-      });
-    });
-  },
+      })
+    })
+  }
+
+
+  // getSingleUser: userid => {
+  //   return new Promise((resolve, reject) => {
+  //     User.findById(userid, (err, user) => {
+  //       !err ? resolve(user) : reject(err);
+  //     });
+  //   });
+  // },
   newUser: userData => {
     return new Promise((resolve, reject) => {
       const {
@@ -87,7 +97,11 @@ module.exports = {
   validatePassword: (user, password) => {
     return new Promise((resolve, reject) => {
       user.comparePassword(password, (err, isMatch) => {
-        !err ? resolve(user) : reject(err);
+        if (isMatch) {
+          !err ? resolve(user) : reject(err);
+        } else {
+          reject(err);
+        }
       });
     });
   },

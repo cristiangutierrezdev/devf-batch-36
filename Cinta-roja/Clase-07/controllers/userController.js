@@ -1,25 +1,37 @@
 const {
   getSingleUser,
-  newUser,
-  getAllUser,
-  modifyThisUser,
-  deleteThisUser,
-  findUserEmail,
-  validatePassword,
-  generateToken
+  // newUser,
+  // getAllUser,
+  // modifyThisUser,
+  // deleteThisUser,
+  // findUserEmail,
+  // validatePassword,
+  // generateToken
 } = require("./resolvers/userResolver");
 
 module.exports = {
-  getUser: (req, res) => {
-    const userid = req.params.userid;
+
+  getUser: (req, res) =>{
+    const userid = req.params
     getSingleUser(userid)
-      .then(user => {
-        res.status(200).send(user);
-      })
-      .catch(err => {
-        res.status(404).send(err);
-      });
+    .then((user) => {
+      res.status(200).send(user)
+    }).catch((err) => {
+      res.status(404).send(err)
+      
+    });
   },
+
+  // getUser: (req, res) => {
+  //   const userid = req.params.userid;
+  //   getSingleUser(userid)
+  //     .then(user => {
+  //       res.status(200).send(user);
+  //     })
+  //     .catch(err => {
+  //       res.status(404).send(err);
+  //     });
+  // },
   createUser: (req, res) => {
     newUser(req.body)
       .then(user => {
